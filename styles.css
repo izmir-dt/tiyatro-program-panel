@@ -1,0 +1,698 @@
+/* =============================================
+   İzmir Devlet Tiyatrosu - Ana Stil Dosyası
+   Düzenlemek için bu dosyayı kullanın.
+   ============================================= */
+
+/* === RENK DEĞİŞKENLERİ (Kolay Özelleştirme) === */
+:root {
+  --bg-primary: #0c0c16;
+  --bg-secondary: #12121f;
+  --bg-card: #1a1a2e;
+  --bg-card-hover: #1f1f38;
+  --border: #2d2d4e;
+  --text-primary: #e2e2f0;
+  --text-secondary: #9090b8;
+  --text-muted: #5c5c80;
+  --accent: #5c5cf5;
+  --accent-hover: #6e6ef7;
+  --accent-muted: rgba(92, 92, 245, 0.12);
+  --success: #4ade80;
+  --danger: #e05c5c;
+  --warning: #f59e0b;
+  --font: 'Poppins', sans-serif;
+  --radius: 12px;
+  --radius-sm: 8px;
+  --shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+}
+
+/* === GENEL SIFIRLA === */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+input, button, textarea, select {
+  font-family: inherit;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+/* === SAYFA DÜZENI === */
+.page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* === HEADER === */
+.header {
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 20px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.header-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.brand-icon {
+  font-size: 24px;
+}
+
+.brand-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+
+.brand-sub {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.header-nav {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+.nav-btn {
+  padding: 6px 14px;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  transition: all 0.15s;
+}
+
+.nav-btn:hover {
+  background: var(--bg-card-hover);
+  color: var(--text-primary);
+}
+
+.nav-btn.active {
+  background: var(--accent-muted);
+  color: var(--accent);
+}
+
+.nav-btn.protected {
+  color: var(--text-muted);
+}
+
+.back-btn {
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+  transition: all 0.15s;
+}
+
+.back-btn:hover {
+  color: var(--text-primary);
+  border-color: var(--text-muted);
+}
+
+/* === ANA İÇERİK === */
+.main-content {
+  flex: 1;
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 24px 20px;
+}
+
+/* === DASHBOARD GRID === */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+@media (max-width: 900px) {
+  .dashboard-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 500px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* === İSTATİSTİK KARTI === */
+.stat-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  transition: border-color 0.15s;
+}
+
+.stat-card:hover {
+  border-color: var(--accent);
+}
+
+.stat-icon {
+  font-size: 28px;
+  flex-shrink: 0;
+}
+
+.stat-value {
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1;
+}
+
+.stat-label {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+/* === SECTION === */
+.section {
+  margin-bottom: 32px;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.section-header h2 {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* === ARAMA KUTUSU === */
+.search-box input,
+input[type="text"],
+input[type="password"] {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  padding: 8px 14px;
+  font-size: 13px;
+  outline: none;
+  width: 240px;
+  transition: border-color 0.15s;
+}
+
+.search-box input:focus,
+input[type="text"]:focus,
+input[type="password"]:focus {
+  border-color: var(--accent);
+}
+
+input::placeholder {
+  color: var(--text-muted);
+}
+
+/* === OYUN GRİD === */
+.oyun-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 16px;
+}
+
+/* === OYUN KARTI === */
+.oyun-kart {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.oyun-kart:hover {
+  border-color: var(--accent);
+  background: var(--bg-card-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+}
+
+.oyun-kart-baslik {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+
+.oyun-kart-meta {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.oyun-badge {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+.badge-blue { background: rgba(59,130,246,0.15); color: #60a5fa; }
+.badge-green { background: rgba(74,222,128,0.15); color: #4ade80; }
+.badge-orange { background: rgba(251,146,60,0.15); color: #fb923c; }
+.badge-purple { background: rgba(167,139,250,0.15); color: #a78bfa; }
+.badge-red { background: rgba(248,113,113,0.15); color: #f87171; }
+.badge-yellow { background: rgba(250,204,21,0.15); color: #facc15; }
+.badge-turne { background: rgba(92,92,245,0.15); color: #818cf8; }
+
+/* === KAYIT LİSTESİ === */
+.kayit-listesi {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.kategori-grup {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.kategori-baslik {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  background: rgba(255,255,255,0.03);
+  border-bottom: 1px solid var(--border);
+}
+
+.kategori-baslik span {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.kayit-items {
+  padding: 10px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.kayit-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 4px 0;
+}
+
+.kayit-kisi {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+  cursor: pointer;
+  flex-shrink: 0;
+  min-width: 150px;
+}
+
+.kayit-kisi:hover {
+  text-decoration: underline;
+  color: var(--accent);
+}
+
+.kayit-rol {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+/* === TURNE TABLOSU === */
+.turne-tablo-wrap {
+  overflow-x: auto;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+}
+
+.turne-tablo {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--bg-card);
+}
+
+.turne-tablo th {
+  padding: 10px 14px;
+  text-align: left;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--border);
+  background: rgba(255,255,255,0.03);
+}
+
+.turne-tablo td {
+  padding: 10px 14px;
+  font-size: 13px;
+  color: var(--text-primary);
+  border-bottom: 1px solid rgba(45,45,78,0.5);
+}
+
+.turne-tablo tr:last-child td {
+  border-bottom: none;
+}
+
+.turne-tablo tr:hover td {
+  background: rgba(255,255,255,0.03);
+}
+
+/* === ADMİN PANELİ === */
+.admin-panel {
+  max-width: 700px;
+}
+
+.admin-panel h2 {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 24px;
+}
+
+.admin-section {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  margin-bottom: 16px;
+}
+
+.admin-section h3 {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.admin-desc {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+}
+
+.admin-section textarea {
+  width: 100%;
+  background: var(--bg-primary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  padding: 12px;
+  font-size: 12px;
+  font-family: monospace;
+  resize: vertical;
+  outline: none;
+  margin-bottom: 12px;
+}
+
+.admin-section textarea:focus {
+  border-color: var(--accent);
+}
+
+.admin-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.admin-msg {
+  margin-top: 10px;
+  font-size: 13px;
+  min-height: 20px;
+}
+
+/* === BUTONLAR === */
+.btn-primary {
+  background: var(--accent);
+  color: #fff;
+  padding: 8px 18px;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-weight: 600;
+  transition: background 0.15s;
+}
+
+.btn-primary:hover {
+  background: var(--accent-hover);
+}
+
+.btn-secondary {
+  background: var(--bg-card-hover);
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+  padding: 8px 18px;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-weight: 600;
+  transition: all 0.15s;
+}
+
+.btn-secondary:hover {
+  border-color: var(--text-muted);
+}
+
+.btn-danger {
+  background: rgba(224,92,92,0.15);
+  color: var(--danger);
+  border: 1px solid rgba(224,92,92,0.3);
+  padding: 8px 18px;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-weight: 600;
+  transition: all 0.15s;
+}
+
+.btn-danger:hover {
+  background: rgba(224,92,92,0.25);
+}
+
+/* === GİRİŞ EKRANI === */
+.auth-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  background: rgba(12, 12, 22, 0.98);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.auth-overlay.hidden {
+  display: none;
+}
+
+.auth-box {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 38px 34px;
+  width: 320px;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7);
+}
+
+.auth-box h1 {
+  font-size: 17px;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 16px;
+  color: var(--text-primary);
+}
+
+.auth-box input {
+  width: 100%;
+  background: var(--bg-primary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  font-size: 15px;
+  padding: 10px 13px;
+  outline: none;
+  margin-bottom: 8px;
+  transition: border-color 0.15s;
+}
+
+.auth-box input:focus {
+  border-color: var(--accent);
+}
+
+.auth-msg {
+  font-size: 12px;
+  min-height: 18px;
+  margin-bottom: 8px;
+  color: var(--danger);
+}
+
+.auth-box button#auth-btn {
+  width: 100%;
+  background: var(--accent);
+  color: #fff;
+  border-radius: var(--radius-sm);
+  padding: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  transition: background 0.15s;
+}
+
+.auth-box button#auth-btn:hover {
+  background: var(--accent-hover);
+}
+
+.auth-links {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.auth-links button {
+  flex: 1;
+  text-align: center;
+  font-size: 11px;
+  color: var(--text-muted);
+  padding: 6px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  transition: all 0.15s;
+}
+
+.auth-links button:hover {
+  border-color: var(--text-muted);
+  color: var(--text-secondary);
+}
+
+#auth-change-form {
+  margin-top: 10px;
+}
+
+#auth-change-form.hidden {
+  display: none;
+}
+
+#auth-save-btn {
+  width: 100%;
+  background: var(--bg-card-hover);
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  margin-top: 6px;
+  transition: all 0.15s;
+}
+
+#auth-save-btn:hover {
+  border-color: var(--accent);
+}
+
+/* === YÜKLENIYOR === */
+.yukleniyor {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60px;
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+/* === BOŞ DURUM === */
+.bos-durum {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--text-muted);
+}
+
+.bos-durum-icon {
+  font-size: 40px;
+  margin-bottom: 12px;
+}
+
+.bos-durum p {
+  font-size: 14px;
+}
+
+/* === SCROLLBAR === */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+/* === MOBİL === */
+@media (max-width: 640px) {
+  .header-nav {
+    display: none;
+  }
+
+  .header-inner {
+    padding: 0 12px;
+  }
+
+  .main-content {
+    padding: 16px 12px;
+  }
+
+  .search-box input,
+  input[type="text"] {
+    width: 100%;
+  }
+
+  .section-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

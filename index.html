@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>İzmir Devlet Tiyatrosu</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div id="app">
+
+    <!-- ===== GİRİŞ EKRANI (Şifreli Sayfalar) ===== -->
+    <div id="auth-overlay" class="auth-overlay hidden">
+      <div class="auth-box">
+        <h1>🔒 Giriş Gerekli</h1>
+        <input id="auth-input" type="password" placeholder="Şifrenizi girin" maxlength="30" />
+        <div id="auth-error" class="auth-msg"></div>
+        <button id="auth-btn">Giriş Yap</button>
+        <div class="auth-links">
+          <button id="auth-home-btn">← Ana Sayfa</button>
+          <button id="auth-change-btn">Şifre Değiştir</button>
+        </div>
+        <div id="auth-change-form" class="hidden">
+          <input id="auth-old-input" type="password" placeholder="Mevcut şifre" maxlength="30" />
+          <input id="auth-new-input" type="password" placeholder="Yeni şifre (min 4 karakter)" maxlength="30" />
+          <div id="auth-change-msg" class="auth-msg"></div>
+          <button id="auth-save-btn">Kaydet</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== SAYFA ROUTER ===== -->
+    <div id="page-container"></div>
+
+  </div>
+
+  <!-- ================================================================
+       SAYFA ŞABLONLARI
+       Turne ve Yönetici kendi HTML dosyaları — buraya template YOK.
+       Nav içindeki linkleri düzenlemek için aşağıdaki template'leri kullanın.
+       ================================================================ -->
+
+  <!-- ===== ANA SAYFA ===== -->
+  <template id="tpl-home">
+    <div class="page">
+      <header class="header">
+        <div class="header-inner">
+          <div class="header-brand">
+            <span class="brand-icon">🎭</span>
+            <div>
+              <h1 class="brand-title">İzmir Devlet Tiyatrosu</h1>
+              <p class="brand-sub">Kadro Takip Sistemi</p>
+            </div>
+          </div>
+          <nav class="header-nav">
+            <button class="nav-btn active" data-page="home">Ana Sayfa</button>
+            <button class="nav-btn" data-page="oyunlar">Oyunlar</button>
+            <!-- Turne ve Yönetici: kendi bağımsız HTML dosyaları -->
+            <a class="nav-btn" href="turne.html">Turne</a>
+            <button class="nav-btn protected" data-page="arsiv-oyunlar">Arşiv</button>
+            <button class="nav-btn protected" data-page="gorevli-olmayan">Görevsiz</button>
+            <a class="nav-btn" href="yonetici.html">Yönetici</a>
+          </nav>
+        </div>
+      </header>
+      <main class="main-content">
+        <!-- İstatistik Kartları -->
+        <div class="dashboard-grid">
+          <div class="stat-card">
+            <div class="stat-icon">🎬</div>
+            <div class="stat-body">
+              <div class="stat-value" id="val-oyunlar">—</div>
+              <div class="stat-label">Aktif Oyun</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">👥</div>
+            <div class="stat-body">
+              <div class="stat-value" id="val-kisi">—</div>
+              <div class="stat-label">Sanatçı</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">📋</div>
+            <div class="stat-body">
+              <div class="stat-value" id="val-kayit">—</div>
+              <div class="stat-label">Toplam Kayıt</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">🚌</div>
+            <div class="stat-body">
+              <div class="stat-value" id="val-turne">—</div>
+              <div class="stat-label">Turne Oyunu</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Oyun Listesi -->
+        <div class="section">
+          <div class="section-header">
+            <h2>Aktif Oyunlar</h2>
+            <div class="search-box">
+              <input type="text" id="search-oyun" placeholder="Oyun veya kişi ara..." />
+            </div>
+          </div>
+          <div id="oyun-listesi" class="oyun-grid"></div>
+        </div>
+      </main>
+    </div>
+  </template>
+
+  <!-- ===== OYUN DETAY SAYFASI ===== -->
+  <template id="tpl-oyunlar">
+    <div class="page">
+      <header class="header">
+        <div class="header-inner">
+          <div class="header-brand">
+            <button class="back-btn" data-page="home">← Geri</button>
+            <span class="brand-icon">🎭</span>
+            <div>
+              <h1 class="brand-title" id="oyun-detay-ad">Oyun Detayı</h1>
+            </div>
+          </div>
+          <nav class="header-nav">
+            <button class="nav-btn" data-page="home">Ana Sayfa</button>
+            <a class="nav-btn" href="turne.html">Turne</a>
+            <a class="nav-btn" href="yonetici.html">Yönetici</a>
+          </nav>
+        </div>
+      </header>
+      <main class="main-content">
+        <div class="section">
+          <div class="section-header">
+            <h2 id="oyunlar-baslik">Kadro</h2>
+            <input type="text" id="search-kisi" placeholder="Kişi ara..." />
+          </div>
+          <div id="oyunlar-icerik" class="kayit-listesi"></div>
+        </div>
+      </main>
+    </div>
+  </template>
+
+  <!-- ===== ARŞİV OYUNLAR (ŞİFRELİ) ===== -->
+  <template id="tpl-arsiv-oyunlar">
+    <div class="page">
+      <header class="header">
+        <div class="header-inner">
+          <div class="header-brand">
+            <button class="back-btn" data-page="home">← Geri</button>
+            <span class="brand-icon">📁</span>
+            <div>
+              <h1 class="brand-title">Arşiv Oyunlar</h1>
+            </div>
+          </div>
+          <nav class="header-nav">
+            <button class="nav-btn" data-page="home">Ana Sayfa</button>
+            <a class="nav-btn" href="turne.html">Turne</a>
+            <a class="nav-btn" href="yonetici.html">Yönetici</a>
+          </nav>
+        </div>
+      </header>
+      <main class="main-content">
+        <div class="section">
+          <div class="section-header">
+            <h2>Arşiv Oyunlar</h2>
+            <input type="text" id="search-arsiv" placeholder="Oyun ara..." />
+          </div>
+          <div id="arsiv-icerik" class="oyun-grid"></div>
+        </div>
+      </main>
+    </div>
+  </template>
+
+  <!-- ===== GÖREVLİ OLMAYAN (ŞİFRELİ) ===== -->
+  <template id="tpl-gorevli-olmayan">
+    <div class="page">
+      <header class="header">
+        <div class="header-inner">
+          <div class="header-brand">
+            <button class="back-btn" data-page="home">← Geri</button>
+            <span class="brand-icon">🚫</span>
+            <div>
+              <h1 class="brand-title">Görevli Olmayan Sanatçılar</h1>
+            </div>
+          </div>
+          <nav class="header-nav">
+            <button class="nav-btn" data-page="home">Ana Sayfa</button>
+            <a class="nav-btn" href="turne.html">Turne</a>
+            <a class="nav-btn" href="yonetici.html">Yönetici</a>
+          </nav>
+        </div>
+      </header>
+      <main class="main-content">
+        <div class="section">
+          <div class="section-header">
+            <h2>Görevli Olmayan Sanatçılar</h2>
+          </div>
+          <div id="gorevli-olmayan-icerik"></div>
+        </div>
+      </main>
+    </div>
+  </template>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
